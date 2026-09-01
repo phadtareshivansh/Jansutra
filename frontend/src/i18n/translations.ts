@@ -107,7 +107,8 @@ export type TranslationKey =
   | "scale.stateUts"
   | "scale.note"
   | "dataviz.caption"
-  | "dataviz.barName";
+  | "dataviz.barName"
+  | "accessibility.skipToContent";
 
 export type Translation = Record<TranslationKey, string>;
 
@@ -225,6 +226,7 @@ const en: Translation = {
   "scale.note": "Census 2027, at a glance",
   "dataviz.caption": "States & UTs beginning their self-enumeration window by month (sample schedule shown)",
   "dataviz.barName": "States entering house-listing phase",
+  "accessibility.skipToContent": "Skip to content",
 };
 
 const hi: Translation = {
@@ -336,6 +338,7 @@ const hi: Translation = {
   "scale.note": "जनगणना 2027, एक नज़र में",
   "dataviz.caption": "महीने दर महीने अपनी स्व-गणना खिड़की शुरू करने वाले राज्य और केंद्र शासित प्रदेश (नमूना अनुसूची दिखाई गई है)",
   "dataviz.barName": "मकान सूची चरण में प्रवेश करने वाले राज्य",
+  "accessibility.skipToContent": "मुख्य सामग्री पर जाएँ",
 };
 
 const mr: Translation = {
@@ -446,6 +449,7 @@ const mr: Translation = {
   "scale.note": "जनगणना 2027, एका दृष्टीक्षेपात",
   "dataviz.caption": "महिन्यागणिक आपली स्व-गणना खिडकी सुरू करणारी राज्ये आणि केंद्रशासित प्रदेशे (नमुना वेळापत्रक दाखवले)",
   "dataviz.barName": "गृहयादी टप्प्यात प्रवेश करणारी राज्ये",
+  "accessibility.skipToContent": "मुख्य सामग्रीकडे जा",
 };
 
 const ta: Translation = {
@@ -556,6 +560,7 @@ const ta: Translation = {
   "scale.note": "மக்கள் தொகை கணக்கெடுப்பு 2027, ஒரு பார்வையில்",
   "dataviz.caption": "மாதந்தோறும் தங்கள் சுய கணக்கெடுப்பு காலத்தைத் தொடங்கும் மாநிலங்கள் & யூனியன் பிரதேசங்கள் (மாதிரி அட்டவணை காட்டப்பட்டுள்ளது)",
   "dataviz.barName": "வீட்டுப்பட்டியல் கட்டத்திற்குச் செல்லும் மாநிலங்கள்",
+  "accessibility.skipToContent": "உள்ளடக்கத்திற்கு செல்லவும்",
 };
 
 export const translations: Record<Lang, Translation> = { en, hi, mr, ta };

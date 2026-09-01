@@ -6,8 +6,11 @@ export default function Layout() {
   const { t } = useI18n();
   return (
     <>
+      <a href="#main" className="skip-link">
+        {t("accessibility.skipToContent")}
+      </a>
       <Header />
-      <main>
+      <main id="main">
         <Outlet />
       </main>
       <footer className="footer">

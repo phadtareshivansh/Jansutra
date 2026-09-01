@@ -52,7 +52,7 @@ export default function Assistant() {
   return (
     <Section id="assistant" title={t("assistant.title")} subtitle={t("assistant.subtitle")}>
       <div className="chat">
-        <div className="chat-log" ref={scrollRef}>
+        <div className="chat-log" ref={scrollRef} role="log" aria-live="polite" aria-label={t("assistant.title")}>
           {messages.length === 0 && !loading && (
             <div className="chat-empty">
               <span className="chat-empty-icon">💬</span>
@@ -109,6 +109,7 @@ export default function Assistant() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t("assistant.placeholder")}
+            aria-label={t("assistant.placeholder")}
             disabled={loading}
           />
           <button type="submit" className="btn-primary" disabled={loading || !input.trim()}>

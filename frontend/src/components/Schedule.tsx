@@ -69,6 +69,7 @@ export default function Schedule({
         className="search"
         type="search"
         placeholder={t("schedule.search")}
+        aria-label={t("schedule.search")}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         disabled={loading}
