@@ -1,30 +1,29 @@
-import { getStates } from "./firestore.js";
-import { ok } from "./shared.js";
+import type { IncomingMessage, ServerResponse } from "http";
+import { getStates } from "./firestore";
+import { verifyIdToken, applyCors, send } from "./auth";
 
 export const config = { runtime: "nodejs" };
 
-export default async function handler(req: import("http").IncomingMessage, res: import("http").ServerResponse) {
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
+  if (req.method === "OPTIONS") {
+    applyCors(res, req);
+    res.statusCode = 204;
+    res.end();
+    return;
+  }
+
+  applyCors(res, req);
   if (req.method !== "GET") {
-    res.statusCode = 405;
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Method not allowed" }));
+    send(res, 405, { error: "Method not allowed" });
+    return;
+  }
+
+  const user = await verifyIdToken(req);
+  if (!user) {
+    send(res, 401, { error: "Unauthorized" });
     return;
   }
 
   const states = await getStates();
-  ok({ states }, asVercelResponse(res));
-}
-
-function asVercelResponse(res: import("http").ServerResponse): { status: (c: number) => { json: (b: unknown) => void } } {
-  return {
-    status: (code: number) => {
-      res.statusCode = code;
-      return {
-        json: (body: unknown) => {
-          res.setHeader("Content-Type", "application/json");
-          res.end(JSON.stringify(body));
-        },
-      };
-    },
-  };
+  send(res, 200, { states });
 }

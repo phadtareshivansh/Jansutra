@@ -55,7 +55,7 @@ export default function Schedule({
 }) {
   const { t } = useI18n();
   const [query, setQuery] = useState("");
-  const loading = externalLoading || states.length === 0;
+  const loading = externalLoading;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

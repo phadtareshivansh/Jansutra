@@ -1,6 +1,6 @@
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
-import { STATE_SCHEDULES, type StateSchedule } from "./data.js";
+import { STATE_SCHEDULES, type StateSchedule } from "../shared/data";
 
 /**
  * Firestore helpers for Vercel serverless functions.
@@ -49,9 +49,11 @@ export async function getStates(): Promise<StateSchedule[]> {
     if (snap.empty) return STATE_SCHEDULES;
     return snap.docs.map((doc) => {
       const d = doc.data();
+      const state = String(d.name ?? d.state ?? "");
+      const seed = STATE_SCHEDULES.find((s) => s.state === state);
       return {
-        id: Number(doc.id) || 0,
-        state: String(d.name ?? d.state ?? ""),
+        id: typeof d.id === "number" ? d.id : seed?.id ?? 0,
+        state,
         selfEnumStart: String(d.selfEnumStart ?? ""),
         selfEnumEnd: String(d.selfEnumEnd ?? ""),
         houseListingStart: String(d.houseListingStart ?? ""),

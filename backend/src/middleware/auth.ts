@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { getAuth } from "firebase-admin/auth";
 import { getFirebaseApp } from "../db";
 
 /**
@@ -29,7 +30,6 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
   }
 
   try {
-    const { getAuth } = await import("firebase-admin/auth");
     const decoded = await getAuth(app).verifyIdToken(token);
     res.locals.user = decoded;
     next();

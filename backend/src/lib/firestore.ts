@@ -1,5 +1,6 @@
 import { getFirestoreDb } from "../db";
-import { STATE_SCHEDULES, type StateSchedule } from "../data/states";
+import { STATE_SCHEDULES } from "../../../shared/data";
+import type { StateSchedule } from "../../../shared/types";
 
 /**
  * Fetch all states from the Firestore "states" collection.
@@ -17,9 +18,11 @@ export async function getStates(): Promise<StateSchedule[]> {
     if (snap.empty) return STATE_SCHEDULES;
     return snap.docs.map((doc) => {
       const d = doc.data();
+      const state = String(d.name ?? d.state ?? "");
+      const seed = STATE_SCHEDULES.find((s) => s.state === state);
       return {
-        id: Number(doc.id) || 0,
-        state: String(d.state ?? ""),
+        id: typeof d.id === "number" ? d.id : seed?.id ?? 0,
+        state,
         selfEnumStart: String(d.selfEnumStart ?? ""),
         selfEnumEnd: String(d.selfEnumEnd ?? ""),
         houseListingStart: String(d.houseListingStart ?? ""),
@@ -35,16 +38,18 @@ export async function getStates(): Promise<StateSchedule[]> {
 /** Fetch a single state by its Firestore document id. */
 export async function getStateById(id: string): Promise<StateSchedule | null> {
   const db = getFirestoreDb();
-  const fallback = STATE_SCHEDULES.find((s) => String(s.id) === id) ?? null;
+  const fallback = STATE_SCHEDULES.find((s) => s.state === id) ?? null;
   if (!db) return fallback;
 
   try {
     const doc = await db.collection("states").doc(id).get();
     if (!doc.exists) return fallback ?? null;
     const d = doc.data()!;
+    const state = String(d.name ?? d.state ?? "");
+    const seed = STATE_SCHEDULES.find((s) => s.state === state);
     return {
-      id: Number(doc.id) || 0,
-      state: String(d.state ?? ""),
+      id: typeof d.id === "number" ? d.id : seed?.id ?? 0,
+      state,
       selfEnumStart: String(d.selfEnumStart ?? ""),
       selfEnumEnd: String(d.selfEnumEnd ?? ""),
       houseListingStart: String(d.houseListingStart ?? ""),
@@ -55,3 +60,4 @@ export async function getStateById(id: string): Promise<StateSchedule | null> {
     return fallback;
   }
 }
+

@@ -1,7 +1,7 @@
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
-export { type StateSchedule } from "./data/states";
+export type { StateSchedule } from "../../shared/types";
 
 let cachedApp: App | null = null;
 let cachedDb: Firestore | null = null;
