@@ -18,8 +18,15 @@ type FaqSeed = {
 };
 
 const STATES: StateSeed[] = [
+  { name: "Andaman & Nicobar", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
+  { name: "Delhi (NDMC)", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
+  { name: "Goa", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
+  { name: "Sikkim", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
+  { name: "Odisha", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
   { name: "Karnataka", selfEnumStart: "2026-04-01", selfEnumEnd: "2026-04-15", houseListingStart: "2026-04-16", houseListingEnd: "2026-05-15" },
   { name: "Gujarat", selfEnumStart: "2026-04-05", selfEnumEnd: "2026-04-19", houseListingStart: "2026-04-20", houseListingEnd: "2026-05-19" },
+  { name: "Jharkhand", selfEnumStart: "2026-05-01", selfEnumEnd: "2026-05-15", houseListingStart: "2026-05-16", houseListingEnd: "2026-06-14" },
+  { name: "Rajasthan", selfEnumStart: "2026-05-01", selfEnumEnd: "2026-05-15", houseListingStart: "2026-05-16", houseListingEnd: "2026-06-14" },
   { name: "Maharashtra", selfEnumStart: "2026-05-01", selfEnumEnd: "2026-05-15", houseListingStart: "2026-05-16", houseListingEnd: "2026-06-14" },
   { name: "Uttar Pradesh", selfEnumStart: "2026-05-07", selfEnumEnd: "2026-05-21", houseListingStart: "2026-05-22", houseListingEnd: "2026-06-20" },
   { name: "Kerala", selfEnumStart: "2026-06-16", selfEnumEnd: "2026-06-30", houseListingStart: "2026-07-01", houseListingEnd: "2026-07-30" },
