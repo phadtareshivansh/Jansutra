@@ -3,6 +3,7 @@ import { useI18n } from "../i18n/I18nContext";
 import type { TranslationKey } from "../i18n/translations";
 import { windowStatus, type WindowStatus } from "../lib/dateLogic";
 import type { StateSchedule } from "../lib/types";
+import Reveal from "./Reveal";
 import Section from "./Section";
 
 const SCALE_FACTS = [
@@ -72,28 +73,30 @@ export default function Schedule({ states }: { states: StateSchedule[] }) {
       ) : (
         <>
           <div className="schedule-grid">
-            {filtered.map((s) => {
+            {filtered.map((s, i) => {
               const highlight = getHighlight(s);
               const seStatus = windowStatus(s.selfEnumStart, s.selfEnumEnd);
               const hlStatus = windowStatus(s.houseListingStart, s.houseListingEnd);
               return (
-                <div key={s.state} className={`schedule-card ${highlight}`}>
-                  <h3 className="schedule-state">{s.state}</h3>
-                  <div className="schedule-row">
-                    <span className="schedule-kind">{t("schedule.selfEnum")}</span>
-                    <span className="schedule-dates">
-                      {formatDate(s.selfEnumStart)} → {formatDate(s.selfEnumEnd)}
-                    </span>
-                    <span className={`status status-${seStatus}`}>{t(STATUS_LABEL[seStatus])}</span>
+                <Reveal key={s.state} delay={Math.min(i, 5) * 60}>
+                  <div className={`schedule-card ${highlight}`}>
+                    <h3 className="schedule-state">{s.state}</h3>
+                    <div className="schedule-row">
+                      <span className="schedule-kind">{t("schedule.selfEnum")}</span>
+                      <span className="schedule-dates">
+                        {formatDate(s.selfEnumStart)} → {formatDate(s.selfEnumEnd)}
+                      </span>
+                      <span className={`status status-${seStatus}`}>{t(STATUS_LABEL[seStatus])}</span>
+                    </div>
+                    <div className="schedule-row">
+                      <span className="schedule-kind">{t("schedule.houseListing")}</span>
+                      <span className="schedule-dates">
+                        {formatDate(s.houseListingStart)} → {formatDate(s.houseListingEnd)}
+                      </span>
+                      <span className={`status status-${hlStatus}`}>{t(STATUS_LABEL[hlStatus])}</span>
+                    </div>
                   </div>
-                  <div className="schedule-row">
-                    <span className="schedule-kind">{t("schedule.houseListing")}</span>
-                    <span className="schedule-dates">
-                      {formatDate(s.houseListingStart)} → {formatDate(s.houseListingEnd)}
-                    </span>
-                    <span className={`status status-${hlStatus}`}>{t(STATUS_LABEL[hlStatus])}</span>
-                  </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>

@@ -7,6 +7,7 @@ import Privacy from "./components/Privacy";
 import Schedule, { ScaleViz } from "./components/Schedule";
 import DataViz from "./components/DataViz";
 import Assistant from "./components/Assistant";
+import Reveal from "./components/Reveal";
 import { apiFetch } from "./lib/apiFetch";
 import type { StateSchedule } from "./lib/types";
 
@@ -28,19 +29,27 @@ function App() {
 
         <section id="scale" className="scale-section">
           <div className="section-inner">
-            <h2 className="section-title">Census 2027</h2>
-            <ScaleViz />
+            <Reveal>
+              <h2 className="section-title">Census 2027</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <ScaleViz />
+            </Reveal>
             {error && <p className="error">{error}</p>}
           </div>
         </section>
 
         <section id="rollout" className="scale-section">
           <div className="section-inner">
-            <h2 className="section-title">Rollout Timeline</h2>
-            <p className="section-subtitle">
-              Which states begin their self-enumeration window, month by month.
-            </p>
-            <DataViz states={states} />
+            <Reveal>
+              <h2 className="section-title">Rollout Timeline</h2>
+              <p className="section-subtitle">
+                Which states begin their self-enumeration window, month by month.
+              </p>
+            </Reveal>
+            <Reveal delay={100}>
+              <DataViz states={states} />
+            </Reveal>
           </div>
         </section>
 
