@@ -1,7 +1,7 @@
 import { getStates } from "./firestore.js";
 import { ok } from "./shared.js";
 
-export const config = { runtime: "nodejs20.x" };
+export const config = { runtime: "nodejs" };
 
 export default async function handler(req: import("http").IncomingMessage, res: import("http").ServerResponse) {
   if (req.method !== "GET") {
