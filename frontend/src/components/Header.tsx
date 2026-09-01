@@ -17,8 +17,7 @@ const NAV_LINKS: { key: TranslationKey; to: string }[] = [
 const LANGS: Lang[] = ["en", "hi", "mr", "ta"];
 
 export default function Header() {
-  const { t } = useI18n();
-  const { lang, setLang, labels } = useI18n();
+  const { t, lang, setLang, labels } = useI18n();
   const { user, signInWithGoogle, signOutUser } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 

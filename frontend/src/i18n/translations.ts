@@ -99,7 +99,15 @@ export type TranslationKey =
   | "signIn.user"
   | "footer.builtFor"
   | "footer.disclaimer"
-  | "footer.description";
+  | "footer.description"
+  | "home.pageTitle"
+  | "scale.budget"
+  | "scale.enumerators"
+  | "scale.villages"
+  | "scale.stateUts"
+  | "scale.note"
+  | "dataviz.caption"
+  | "dataviz.barName";
 
 export type Translation = Record<TranslationKey, string>;
 
@@ -209,6 +217,14 @@ const en: Translation = {
   "footer.builtFor": "Built for Prompt Wars (H2S) — Census 2027 Challenge",
   "footer.disclaimer": "This is a hackathon demo project. It is not an official Government of India website or census tool.",
   "footer.description": "Jan Sutra is an informational guide to help citizens understand and participate in India's first fully digital census.",
+  "home.pageTitle": "Jan Sutra — Census 2027 Guide",
+  "scale.budget": "Budget",
+  "scale.enumerators": "Enumerators",
+  "scale.villages": "Villages",
+  "scale.stateUts": "States & UTs",
+  "scale.note": "Census 2027, at a glance",
+  "dataviz.caption": "States & UTs beginning their self-enumeration window by month (sample schedule shown)",
+  "dataviz.barName": "States entering house-listing phase",
 };
 
 const hi: Translation = {
@@ -312,6 +328,14 @@ const hi: Translation = {
   "footer.builtFor": "Prompt Wars (H2S) — Census 2027 Challenge के लिए निर्मित",
   "footer.disclaimer": "यह एक हैकाथॉन डेमो प्रोजेक्ट है। यह भारत सरकार की आधिकारिक वेबसाइट या जनगणना उपकरण नहीं है।",
   "footer.description": "जन सूत्र भारत की पहली पूर्ण डिजिटल जनगणना को समझने और उसमें भाग लेने में नागरिकों की मदद करने के लिए एक सूचनात्मक मार्गदर्शिका है।",
+  "home.pageTitle": "जन सूत्र — जनगणना 2027 गाइड",
+  "scale.budget": "बजट",
+  "scale.enumerators": "गणक",
+  "scale.villages": "गाँव",
+  "scale.stateUts": "राज्य और केंद्र शासित प्रदेश",
+  "scale.note": "जनगणना 2027, एक नज़र में",
+  "dataviz.caption": "महीने दर महीने अपनी स्व-गणना खिड़की शुरू करने वाले राज्य और केंद्र शासित प्रदेश (नमूना अनुसूची दिखाई गई है)",
+  "dataviz.barName": "मकान सूची चरण में प्रवेश करने वाले राज्य",
 };
 
 const mr: Translation = {
@@ -414,6 +438,14 @@ const mr: Translation = {
   "footer.builtFor": "Prompt Wars (H2S) — Census 2027 Challenge साठी निर्मित",
   "footer.disclaimer": "हा एक हॅकाथॉन डेमो प्रोजेक्ट आहे. ही भारत सरकारची अधिकृत वेबसाइट किंवा जनगणना साधन नाही.",
   "footer.description": "जन सूत्र हा भारताच्या पहिल्या पूर्णपणे डिजिटल जनगणनेचे समजून घेण्यासाठी आणि त्यात भाग घेण्यासाठी नागरिकांना मदत करणारा माहितीसंग्रह मार्गदर्शक आहे.",
+  "home.pageTitle": "जन सूत्र — जनगणना 2027 मार्गदर्शक",
+  "scale.budget": "बजेट",
+  "scale.enumerators": "गणक",
+  "scale.villages": "गावे",
+  "scale.stateUts": "राज्ये आणि केंद्रशासित प्रदेश",
+  "scale.note": "जनगणना 2027, एका दृष्टीक्षेपात",
+  "dataviz.caption": "महिन्यागणिक आपली स्व-गणना खिडकी सुरू करणारी राज्ये आणि केंद्रशासित प्रदेशे (नमुना वेळापत्रक दाखवले)",
+  "dataviz.barName": "गृहयादी टप्प्यात प्रवेश करणारी राज्ये",
 };
 
 const ta: Translation = {
@@ -516,6 +548,14 @@ const ta: Translation = {
   "footer.builtFor": "Prompt Wars (H2S) — Census 2027 Challenge க்காக உருவாக்கப்பட்டது",
   "footer.disclaimer": "இது ஒரு ஹேக்காத்தான் டெமோ திட்டம். இது இந்திய அரசின் அதிகாரப்பூர்வ இணையதளம் அல்லது மக்கள் தொகை கணக்கெடுப்பு கருவி அல்ல.",
   "footer.description": "ஜன் சூத்ரா இந்தியாவின் முதல் முழு டிஜிட்டல் மக்கள் தொகை கணக்கெடுப்பைப் புரிந்துகொள்ளவும் பங்கேற்கவும் குடிமக்களுக்கு உதவும் தகவல் வழிகாட்டி.",
+  "home.pageTitle": "ஜன் சூத்திரா — மக்கள் தொகை கணக்கெடுப்பு 2027 வழிகாட்டி",
+  "scale.budget": "பட்ஜெட்",
+  "scale.enumerators": "கணக்கெடுப்பாளர்கள்",
+  "scale.villages": "கிராமங்கள்",
+  "scale.stateUts": "மாநிலங்கள் & யூனியன் பிரதேசங்கள்",
+  "scale.note": "மக்கள் தொகை கணக்கெடுப்பு 2027, ஒரு பார்வையில்",
+  "dataviz.caption": "மாதந்தோறும் தங்கள் சுய கணக்கெடுப்பு காலத்தைத் தொடங்கும் மாநிலங்கள் & யூனியன் பிரதேசங்கள் (மாதிரி அட்டவணை காட்டப்பட்டுள்ளது)",
+  "dataviz.barName": "வீட்டுப்பட்டியல் கட்டத்திற்குச் செல்லும் மாநிலங்கள்",
 };
 
 export const translations: Record<Lang, Translation> = { en, hi, mr, ta };

@@ -6,7 +6,7 @@ import { useI18n } from "../i18n/I18nContext";
 
 export default function HomePage() {
   const { t } = useI18n();
-  usePageTitle(`Jan Sutra — Census 2027 Guide`);
+  usePageTitle(t("home.pageTitle"));
   return (
     <>
       <Hero />

@@ -6,12 +6,12 @@ import type { StateSchedule } from "../lib/types";
 import Reveal from "./Reveal";
 import Section from "./Section";
 
-const SCALE_FACTS = [
-  { label: "Budget", value: "₹11,718.24 cr" },
-  { label: "Enumerators", value: "31+ lakh" },
-  { label: "Villages", value: "6.39 lakh" },
-  { label: "States & UTs", value: "36" },
-];
+const SCALE_FACT_TOKENS = [
+  "scale.budget",
+  "scale.enumerators",
+  "scale.villages",
+  "scale.stateUts",
+] as const;
 
 const STATUS_LABEL: Record<WindowStatus, TranslationKey> = {
   open: "schedule.open",
@@ -115,16 +115,24 @@ export default function Schedule({
   );
 }
 
+const SCALE_VALUES: Record<(typeof SCALE_FACT_TOKENS)[number], string> = {
+  "scale.budget": "₹11,718.24 cr",
+  "scale.enumerators": "31+ lakh",
+  "scale.villages": "6.39 lakh",
+  "scale.stateUts": "36",
+};
+
 export function ScaleViz() {
+  const { t } = useI18n();
   return (
     <div className="scale-viz">
-      {SCALE_FACTS.map((f) => (
-        <div key={f.label} className="scale-fact">
-          <span className="scale-value">{f.value}</span>
-          <span className="scale-label">{f.label}</span>
+      {SCALE_FACT_TOKENS.map((key) => (
+        <div key={key} className="scale-fact">
+          <span className="scale-value">{SCALE_VALUES[key]}</span>
+          <span className="scale-label">{t(key)}</span>
         </div>
       ))}
-      <p className="scale-note">Census 2027, at a glance</p>
+      <p className="scale-note">{t("scale.note")}</p>
     </div>
   );
 }

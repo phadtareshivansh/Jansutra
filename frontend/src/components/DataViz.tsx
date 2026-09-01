@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Cell,
 } from "recharts";
+import { useI18n } from "../i18n/I18nContext";
 import type { StateSchedule } from "../lib/types";
 
 const MONTH_ORDER = ["Apr", "May", "Jun", "Jul"];
@@ -18,6 +19,7 @@ function monthOf(iso: string): string {
 }
 
 export default function DataViz({ states }: { states: StateSchedule[] }) {
+  const { t } = useI18n();
   const data = useMemo(() => {
     const counts: Record<string, number> = {};
     states.forEach((s) => {
@@ -51,7 +53,7 @@ export default function DataViz({ states }: { states: StateSchedule[] }) {
               }}
               cursor={{ fill: "rgba(255,153,51,0.08)" }}
             />
-            <Bar dataKey="states" radius={[8, 8, 0, 0]} name="States entering house-listing phase">
+            <Bar dataKey="states" radius={[8, 8, 0, 0]} name={t("dataviz.barName")}>
               {data.map((entry, i) => (
                 <Cell key={entry.month} fill={colors[i]} />
               ))}
@@ -59,9 +61,7 @@ export default function DataViz({ states }: { states: StateSchedule[] }) {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <p className="dataviz-caption">
-        States &amp; UTs beginning their self-enumeration window by month (sample schedule shown)
-      </p>
+      <p className="dataviz-caption">{t("dataviz.caption")}</p>
     </div>
   );
 }
