@@ -32,7 +32,7 @@ export default function DataViz({ states }: { states: StateSchedule[] }) {
 
   if (states.length === 0) return null;
 
-  const colors = ["#ff9933", "#ff9933", "#2563eb", "#138808"];
+  const colors = ["#ff9933", "#ff9933", "#05386b", "#138808"];
 
   return (
     <div className="dataviz">

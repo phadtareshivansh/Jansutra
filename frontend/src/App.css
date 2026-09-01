@@ -14,8 +14,6 @@
   --border: #2a3350;
   --text: #e6e9f0;
   --muted: #9aa3b8;
-  --blue: #2563eb;
-  --blue-hover: #1d4ed8;
 }
 
 html {
@@ -114,18 +112,19 @@ body {
 
 /* ---------- Buttons ---------- */
 .btn-primary {
-  background: var(--blue);
-  color: #fff;
+  background: var(--saffron);
+  color: #141015;
   border: none;
   border-radius: 8px;
   padding: 0.55rem 1.1rem;
   font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .btn-primary:hover {
-  background: var(--blue-hover);
+  background: #f0862a;
 }
 
 .btn-primary:disabled {
@@ -303,7 +302,7 @@ body {
 }
 
 .dot-saffron { background: var(--saffron); border-color: var(--saffron); }
-.dot-blue { background: var(--blue); border-color: var(--blue); }
+.dot-blue { background: var(--navy); border-color: var(--navy); }
 .dot-green { background: var(--green); border-color: var(--green); }
 
 .timeline-label {
@@ -320,7 +319,7 @@ body {
 .timeline-line {
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, var(--saffron), var(--blue), var(--green));
+  background: linear-gradient(90deg, var(--saffron), var(--navy), var(--green));
   min-width: 40px;
   max-width: 160px;
   margin-top: -1.2rem;
@@ -337,7 +336,7 @@ body {
     min-width: 2px;
     max-width: 2px;
     margin-top: 0;
-    background: linear-gradient(180deg, var(--saffron), var(--blue), var(--green));
+    background: linear-gradient(180deg, var(--saffron), var(--navy), var(--green));
   }
   .timeline-node {
     flex-direction: row;
