@@ -2,7 +2,7 @@
 
 ## Development Rules
 
-1. **Prefer proven, boring libraries** over new/fancy ones under time pressure. React, Express, Vite, Postgres — these win hackathons.
+1. **Prefer proven, boring libraries** over new/fancy ones under time pressure. React, Express, Vite, Firestore — these win hackathons.
 
 2. **Commit after every working feature** — small, frequent commits. Never accumulate 50 changes in one commit. A working checkpoint beats a perfect one.
 
@@ -11,7 +11,7 @@
 4. **Default stack:**
    - Frontend: React + Vite + TypeScript
    - Backend: Node.js + Express + TypeScript
-   - Database: Neon Postgres (SQLite fallback for local dev)
+   - Database: Firebase Firestore (in-memory seed data fallback for local dev)
    - Deploy: Vercel
 
 5. **Always keep a working deployable state.** Never leave main broken for longer than 10 minutes. If a feature isn't done, it goes behind a flag or a route — not in a broken state.

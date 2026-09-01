@@ -111,12 +111,12 @@ Frontend → `http://localhost:5173` &nbsp;·&nbsp; Backend → `http://localhos
 ## 🔌 API Endpoints
 
 | Method | Path | Description |
-|---|---|---|
-| `GET` | `/api/ping` | Health check |
-| `GET` | `/api/states` | All state schedules (Firestore, with seed fallback) |
-| `POST` | `/api/ask` | GenAI assistant, grounded in real Census 2027 facts |
+|--------|------|-------------|
+| `GET` | `/api/ping` | Health check (local Express only — not deployed to Vercel) |
+| `GET` | `/api/states` | All state schedules (Firestore, or seed fallback) |
+| `POST` | `/api/ask` | GenAI assistant — grounded in Census 2027 facts (OpenRouter) |
 
-Protected endpoints verify a Firebase ID token sent as `Authorization: Bearer <token>`.
+Production endpoints (`/api/states`, `/api/ask`) and the local Express server verify a Firebase ID token sent as `Authorization: Bearer <token>` when Firebase is configured.
 
 <br/>
 
@@ -150,6 +150,8 @@ npx vercel --prod    # production deploy
 Set environment variables in **Vercel → Project → Settings → Environment Variables** before deploying — see `.env.example` in both `backend/` and `frontend/` for the full list.
 
 <br/>
+
+Firestore and Firebase Auth are both called over HTTPS, so **no special serverless config is needed** in `vercel.json` — Vercel automatically routes `api/*.ts` as serverless functions.
 
 ## 🏆 Built For
 
