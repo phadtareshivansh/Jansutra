@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9933"/>
+      <stop offset="0.5" stop-color="#05386b"/>
+      <stop offset="1" stop-color="#138808"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0b0f1a"/>
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="url(#brand)" stroke-width="3"/>
+  <rect x="10" y="10" width="44" height="44" rx="8" fill="url(#brand)" opacity="0.15"/>
+  <text x="32" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#ff9933" text-anchor="middle">ज</text>
+</svg>
