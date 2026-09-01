@@ -14,21 +14,32 @@ export default function Guide() {
 
   return (
     <Section id="guide" title={t("guide.title")} subtitle={t("guide.subtitle")}>
-      <ol className="guide-steps">
+      <div className="guide-stepper">
         {steps.map((s, i) => (
-          <li key={s.title} className="guide-step">
-            <span className="guide-num">{i + 1}</span>
-            <div>
+          <div key={s.title} className="guide-step">
+            <div className="guide-step-left">
+              <span className="guide-num">{i + 1}</span>
+              {i < steps.length - 1 && <span className="guide-connector" />}
+            </div>
+            <div className="guide-step-content">
               <h3>{t(s.title)}</h3>
               <p>{t(s.desc)}</p>
             </div>
-          </li>
+          </div>
         ))}
-      </ol>
+      </div>
+
+      <div className="guide-nodocs">
+        <span className="guide-nodocs-icon">📋</span>
+        <div>
+          <strong>{t("guide.noDocsTitle")}</strong>
+          <p>{t("guide.noDocsDesc")}</p>
+        </div>
+      </div>
+
       <div className="guide-note">
         <strong>{t("guide.selfEnumId")}:</strong> SE-XXXXX-XXXX
       </div>
     </Section>
   );
 }
-

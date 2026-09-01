@@ -460,8 +460,7 @@ body {
 }
 
 /* ---------- Guide ---------- */
-.guide-steps {
-  list-style: none;
+.guide-stepper {
   max-width: 760px;
   margin: 0 auto;
 }
@@ -470,12 +469,16 @@ body {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--border);
+}
+
+.guide-step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .guide-num {
-  flex-shrink: 0;
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -484,15 +487,57 @@ body {
   display: grid;
   place-items: center;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
-.guide-step h3 {
+.guide-connector {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--border);
+}
+
+.guide-step-content {
+  padding: 0.25rem 0 1.5rem;
+}
+
+.guide-step-content h3 {
   font-size: 1.05rem;
+  margin-bottom: 0.25rem;
 }
 
-.guide-step p {
+.guide-step-content p {
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.guide-nodocs {
+  max-width: 760px;
+  margin: 1.5rem auto;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background: rgba(255, 153, 51, 0.1);
+  border: 1px solid rgba(255, 153, 51, 0.35);
+  border-radius: 12px;
+}
+
+.guide-nodocs-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.guide-nodocs strong {
+  color: var(--saffron);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.guide-nodocs p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .guide-note {
