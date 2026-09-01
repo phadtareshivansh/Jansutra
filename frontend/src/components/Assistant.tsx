@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useI18n } from "../i18n/I18nContext";
+import type { TranslationKey } from "../i18n/translations";
 import { apiFetch } from "../lib/apiFetch";
 import Section from "./Section";
 
+type Message = { role: "user" | "assistant"; content: string };
+
+const SUGGESTIONS: TranslationKey[] = [
+  "assistant.suggested1",
+  "assistant.suggested2",
+  "assistant.suggested3",
+  "assistant.suggested4",
+];
+
 export default function Assistant() {
   const { t } = useI18n();
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  async function ask() {
-    const q = question.trim();
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, loading]);
+
+  async function ask(rawQ: string) {
+    const q = rawQ.trim();
     if (!q || loading) return;
+    const userMsg: Message = { role: "user", content: q };
+    setMessages((prev) => [...prev, userMsg]);
+    setInput("");
     setLoading(true);
     setError(null);
     try {
@@ -20,10 +38,9 @@ export default function Assistant() {
         method: "POST",
         body: JSON.stringify({ question: q }),
       });
-      setAnswer(res.answer);
+      setMessages((prev) => [...prev, { role: "assistant", content: res.answer }]);
     } catch (e) {
       setError(e instanceof Error ? e.message : t("assistant.error"));
-      setAnswer(null);
     } finally {
       setLoading(false);
     }
@@ -31,26 +48,70 @@ export default function Assistant() {
 
   return (
     <Section id="assistant" title={t("assistant.title")} subtitle={t("assistant.subtitle")}>
-      <div className="assistant">
+      <div className="chat">
+        <div className="chat-log" ref={scrollRef}>
+          {messages.length === 0 && !loading && (
+            <div className="chat-empty">
+              <span className="chat-empty-icon">💬</span>
+              <p>{t("assistant.placeholder")}</p>
+            </div>
+          )}
+
+          {messages.map((m, i) => (
+            <div key={i} className={`chat-row ${m.role}`}>
+              <span className="chat-bubble">
+                {m.content}
+              </span>
+            </div>
+          ))}
+
+          {loading && (
+            <div className="chat-row assistant">
+              <span className="chat-bubble typing">
+                <span className="typing-dot" />
+                <span className="typing-dot" />
+                <span className="typing-dot" />
+              </span>
+              <span className="chat-label">{t("assistant.typing")}</span>
+            </div>
+          )}
+        </div>
+
+        {messages.length === 0 && !loading && (
+          <div className="chat-suggestions">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                className="chat-chip"
+                onClick={() => ask(t(s))}
+                disabled={loading}
+              >
+                {t(s)}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {error && <p className="error">{error}</p>}
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            ask();
+            ask(input);
           }}
-          className="assistant-form"
+          className="chat-form"
         >
           <input
             className="assistant-input"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder={t("assistant.placeholder")}
+            disabled={loading}
           />
-          <button type="submit" className="btn-primary" disabled={loading || !question.trim()}>
-            {loading ? t("assistant.typing") : t("assistant.ask")}
+          <button type="submit" className="btn-primary" disabled={loading || !input.trim()}>
+            {t("assistant.ask")}
           </button>
         </form>
-        {error && <p className="error">{error}</p>}
-        {answer && <div className="assistant-answer">{answer}</div>}
       </div>
     </Section>
   );
