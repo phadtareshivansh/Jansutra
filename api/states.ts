@@ -1,9 +1,9 @@
-import { STATE_SCHEDULES } from "../backend/src/data/states.js";
+import { getStates } from "./firestore.js";
 import { ok } from "./shared.js";
 
 export const config = { runtime: "nodejs20.x" };
 
-export default function handler(req: import("http").IncomingMessage, res: import("http").ServerResponse) {
+export default async function handler(req: import("http").IncomingMessage, res: import("http").ServerResponse) {
   if (req.method !== "GET") {
     res.statusCode = 405;
     res.setHeader("Content-Type", "application/json");
@@ -11,7 +11,8 @@ export default function handler(req: import("http").IncomingMessage, res: import
     return;
   }
 
-  ok({ states: STATE_SCHEDULES }, asVercelResponse(res));
+  const states = await getStates();
+  ok({ states }, asVercelResponse(res));
 }
 
 function asVercelResponse(res: import("http").ServerResponse): { status: (c: number) => { json: (b: unknown) => void } } {
