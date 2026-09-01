@@ -552,21 +552,77 @@ body {
 }
 
 /* ---------- Privacy ---------- */
-.myths {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+.protection {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--navy);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.protection-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.protection-list {
+  list-style: none;
+}
+
+.protection-list li {
+  padding: 0.5rem 0;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.protection-check {
+  color: var(--green);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.privacy-myths {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.myth-heading {
+  text-align: center;
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
 }
 
 .myth-card {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.5rem;
+  overflow: hidden;
 }
 
-.myth-vs {
-  margin-bottom: 0.75rem;
+.myth-card[open] .myth-toggle {
+  transform: rotate(45deg);
+}
+
+.myth-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+.myth-summary::-webkit-details-marker {
+  display: none;
 }
 
 .myth-tag {
@@ -574,28 +630,40 @@ body {
   color: var(--saffron);
   border: 1px solid rgba(255, 153, 51, 0.4);
   border-radius: 999px;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .myth-claim {
-  font-style: italic;
   color: var(--text);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  flex: 1;
 }
 
-.myth-divider {
-  margin: 0.9rem 0;
-  height: 1px;
-  background: var(--border);
+.myth-toggle {
+  color: var(--saffron);
+  font-size: 1.25rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.myth-body {
+  padding: 0 1.25rem 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+  margin-top: 0;
+  padding-left: 4rem;
 }
 
 .myth-fact {
   color: #6fd46a;
   font-weight: 600;
+  font-size: 0.92rem;
 }
 
 .privacy-note {
