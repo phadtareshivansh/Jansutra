@@ -27,7 +27,7 @@ REPLY RULES:
 - Keep the reply brief (under ~120 words unless more is clearly needed).
 `;
 
-export const config = { runtime: "nodejs20.x" };
+export const config = { runtime: "nodejs" };
 
 const inFlight = new Map<string, number>();
 
