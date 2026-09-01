@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { cert, initializeApp, getApps } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
