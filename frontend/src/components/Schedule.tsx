@@ -46,10 +46,16 @@ function SkeletonCards({ count = 6 }: { count?: number }) {
   );
 }
 
-export default function Schedule({ states }: { states: StateSchedule[] }) {
+export default function Schedule({
+  states,
+  externalLoading = false,
+}: {
+  states: StateSchedule[];
+  externalLoading?: boolean;
+}) {
   const { t } = useI18n();
   const [query, setQuery] = useState("");
-  const loading = states.length === 0;
+  const loading = externalLoading || states.length === 0;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

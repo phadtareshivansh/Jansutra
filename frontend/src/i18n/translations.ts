@@ -13,6 +13,11 @@ export type TranslationKey =
   | "hero.subtitle"
   | "hero.phase1"
   | "hero.phase2"
+  | "hero.ctaGuide"
+  | "hero.ctaSchedule"
+  | "home.scaleTitle"
+  | "home.rolloutTitle"
+  | "home.rolloutSubtitle"
   | "phase.title"
   | "phase.intro"
   | "phase1.name"
@@ -112,6 +117,11 @@ const en: Translation = {
     "India's 16th census — 8th since Independence and the first fully digital enumeration.",
   "hero.phase1": "Phase 1: Houselisting & Housing Census (Apr–Sep 2026)",
   "hero.phase2": "Phase 2: Population Enumeration (Feb 2027)",
+  "hero.ctaGuide": "How to self-enumerate",
+  "hero.ctaSchedule": "Check your state's dates",
+  "home.scaleTitle": "Census 2027, at a glance",
+  "home.rolloutTitle": "Rollout Timeline",
+  "home.rolloutSubtitle": "Which states begin their self-enumeration window, month by month.",
   "phase.title": "The Two Phases",
   "phase.intro":
     "Census 2027 runs in two phases. Each phase collects different information at different times.",
@@ -215,6 +225,11 @@ const hi: Translation = {
     "भारत की 16वीं जनगणना — स्वतंत्रता के बाद 8वीं और पहली पूर्ण डिजिटल गणना।",
   "hero.phase1": "चरण 1: मकान सूची एवं आवास जनगणना (अप्रैल–सित 2026)",
   "hero.phase2": "चरण 2: जनसंख्या गणना (फ़रवरी 2027)",
+  "hero.ctaGuide": "स्व-गणना कैसे करें",
+  "hero.ctaSchedule": "अपने राज्य की तिथियाँ देखें",
+  "home.scaleTitle": "जनगणना 2027, एक नज़र में",
+  "home.rolloutTitle": "रोलआउट समयरेखा",
+  "home.rolloutSubtitle": "कौन से राज्य अपनी स्व-गणना खिड़की शुरू करते हैं, महीने दर महीने।",
   "phase.title": "दो चरण",
   "phase.intro": "जनगणना 2027 दो चरणों में चलती है। हर चरण अलग समय पर अलग जानकारी एकत्र करता है।",
   "phase1.name": "चरण 1 — मकान सूची एवं आवास जनगणना",
@@ -312,6 +327,11 @@ const mr: Translation = {
   "hero.subtitle": "भारताची 16वी जनगणना — स्वातंत्र्यानंतरची 8वी आणि पहिली पूर्ण डिजिटल गणना।",
   "hero.phase1": "टप्पा 1: गृहयादी व गृहनिर्माण जनगणना (एप्रिल–सप्टें 2026)",
   "hero.phase2": "टप्पा 2: लोकसंख्या गणना (फेब्रुवारी 2027)",
+  "hero.ctaGuide": "स्व-गणना कशी करावी",
+  "hero.ctaSchedule": "तुमच्या राज्याच्या तारखा पहा",
+  "home.scaleTitle": "जनगणना 2027, एका दृष्टीक्षेपात",
+  "home.rolloutTitle": "रोलआउट वेळरेषा",
+  "home.rolloutSubtitle": "कोणती राज्ये महिन्यागणिक आपली स्व-गणना खिडकी सुरू करतात.",
   "phase.title": "दोन टप्पे",
   "phase.intro": "जनगणना 2027 दोन टप्प्यांत चालते. प्रत्येक टप्पा वेगळ्या वेळी वेगळी माहिती गोळा करतो.",
   "phase1.name": "टप्पा 1 — गृहयादी व गृहनिर्माण जनगणना",
@@ -409,6 +429,11 @@ const ta: Translation = {
   "hero.subtitle": "இந்தியாவின் 16வது கணக்கெடுப்பு — சுதந்திரத்திற்குப் பிறகு 8வது மற்றும் முதல் முழு டிஜிட்டல் கணக்கெடுப்பு.",
   "hero.phase1": "கட்டம் 1: வீட்டுப்பட்டியல் மற்றும் வீட்டுவசதி கணக்கெடுப்பு (ஏப்–செப் 2026)",
   "hero.phase2": "கட்டம் 2: மக்கள் தொகை கணக்கெடுப்பு (பிப் 2027)",
+  "hero.ctaGuide": "சுய கணக்கெடுப்பு எப்படி",
+  "hero.ctaSchedule": "உங்கள் மாநிலத்தின் தேதிகளைப் பார்க்க",
+  "home.scaleTitle": "மக்கள் தொகை கணக்கெடுப்பு 2027, ஒரு பார்வையில்",
+  "home.rolloutTitle": "ரோல்அவுட் காலவரிசை",
+  "home.rolloutSubtitle": "எந்த மாநிலங்கள் தங்கள் சுய கணக்கெடுப்பு காலத்தை மாதந்தோறும் தொடங்குகின்றன.",
   "phase.title": "இரண்டு கட்டங்கள்",
   "phase.intro": "மக்கள் தொகை கணக்கெடுப்பு 2027 இரண்டு கட்டங்களில் நடைபெறும். ஒவ்வொரு கட்டமும் வெவ்வேறு நேரத்தில் வெவ்வேறு தகவல்களை சேகரிக்கிறது.",
   "phase1.name": "கட்டம் 1 — வீட்டுப்பட்டியல் மற்றும் வீட்டுவசதி கணக்கெடுப்பு",
