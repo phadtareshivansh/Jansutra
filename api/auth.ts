@@ -52,7 +52,7 @@ export async function verifyIdToken(req: IncomingMessage): Promise<object | null
 export function applyCors(res: ServerResponse, req: IncomingMessage): void {
   const origin = req.headers["origin"] ?? "";
   // Restrict to the deployed frontend (or any frontend calling same-origin).
-  const allowed = ["https://jansutra.vercel.app", "http://localhost:5173", "http://localhost:3000"];
+  const allowed = ["https://jansutra.vercel.app", "https://jansutra-web.vercel.app", "https://jansutra-gamma.vercel.app", "http://localhost:5173", "http://localhost:3000"];
   if (allowed.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Vary", "Origin");
