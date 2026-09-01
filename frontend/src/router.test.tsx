@@ -1,8 +1,14 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, cleanup, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import App from "./App";
+import { createMemoryRouter, Navigate, RouterProvider, type RouteObject } from "react-router-dom";
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import PhasesPage from "./pages/PhasesPage";
+import SelfEnumerationPage from "./pages/SelfEnumerationPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import SchedulePage from "./pages/SchedulePage";
+import AssistantPage from "./pages/AssistantPage";
 import { I18nProvider } from "./i18n/I18nContext";
 import { StatesProvider } from "./context/StatesContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -15,18 +21,33 @@ vi.mock("./lib/apiFetch", () => ({
   }),
 }));
 
+const ROUTES: RouteObject[] = [
+  {
+    element: <Layout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/phases", element: <PhasesPage /> },
+      { path: "/self-enumeration", element: <SelfEnumerationPage /> },
+      { path: "/privacy", element: <PrivacyPage /> },
+      { path: "/schedule", element: <SchedulePage /> },
+      { path: "/assistant", element: <AssistantPage /> },
+      { path: "*", element: <Navigate to="/" replace /> },
+    ],
+  },
+];
+
 function renderApp(initialPath: string) {
-  return render(
+  const router = createMemoryRouter(ROUTES, { initialEntries: [initialPath] });
+  render(
     <I18nProvider>
       <StatesProvider>
         <AuthProvider>
-          <MemoryRouter initialEntries={[initialPath]}>
-            <App />
-          </MemoryRouter>
+          <RouterProvider router={router} />
         </AuthProvider>
       </StatesProvider>
     </I18nProvider>
   );
+  return router;
 }
 
 describe("routing", () => {
@@ -69,6 +90,26 @@ describe("routing", () => {
     fireEvent.click(screen.getByText("Self-Enumeration"));
     await waitFor(() => {
       expect(screen.getByText(/No documents required/)).toBeInTheDocument();
+    });
+  });
+
+  it("supports back/forward navigation", async () => {
+    const router = renderApp("/phases");
+    expect(await screen.findByText(/Population Enumeration/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Ask Assistant"));
+    await waitFor(() => {
+      expect(screen.getByText("Ask the Assistant")).toBeInTheDocument();
+    });
+
+    router.navigate(-1);
+    await waitFor(() => {
+      expect(screen.getByText(/Population Enumeration/)).toBeInTheDocument();
+    });
+
+    router.navigate(1);
+    await waitFor(() => {
+      expect(screen.getByText("Ask the Assistant")).toBeInTheDocument();
     });
   });
 
