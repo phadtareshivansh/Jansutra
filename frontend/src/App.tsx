@@ -8,10 +8,12 @@ import Schedule, { ScaleViz } from "./components/Schedule";
 import DataViz from "./components/DataViz";
 import Assistant from "./components/Assistant";
 import Reveal from "./components/Reveal";
+import { useI18n } from "./i18n/I18nContext";
 import { apiFetch } from "./lib/apiFetch";
 import type { StateSchedule } from "./lib/types";
 
 function App() {
+  const { t } = useI18n();
   const [states, setStates] = useState<StateSchedule[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,7 +62,11 @@ function App() {
         <Assistant />
       </main>
       <footer className="footer">
-        <p>Jan Sutra · Census 2027 Digital Enumeration</p>
+        <div className="footer-inner">
+          <p className="footer-desc">{t("footer.description")}</p>
+          <p className="footer-built">{t("footer.builtFor")}</p>
+          <p className="footer-disclaimer">⚠️ {t("footer.disclaimer")}</p>
+        </div>
       </footer>
     </>
   );

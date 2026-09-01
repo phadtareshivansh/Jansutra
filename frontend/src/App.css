@@ -974,10 +974,36 @@ body {
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 1.5rem 3rem;
   text-align: center;
   color: var(--muted);
   font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.footer-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-desc {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.footer-built {
+  font-weight: 600;
+  color: var(--saffron);
+}
+
+.footer-disclaimer {
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
   border-top: 1px solid var(--border);
 }
 
