@@ -1,4 +1,4 @@
-import { STATE_SCHEDULES } from "../backend/src/data/states.js";
+import { STATE_SCHEDULES } from "./data.js";
 
 const MODEL = "google/gemini-2.5-flash";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";

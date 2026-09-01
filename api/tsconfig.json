@@ -10,5 +10,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["./**/*.ts", "../backend/src/data/states.ts"]
+  "include": ["./**/*.ts"]
 }

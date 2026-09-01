@@ -1,6 +1,6 @@
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
-import { STATE_SCHEDULES, type StateSchedule } from "../backend/src/data/states.js";
+import { STATE_SCHEDULES, type StateSchedule } from "./data.js";
 
 /**
  * Firestore helpers for Vercel serverless functions.
