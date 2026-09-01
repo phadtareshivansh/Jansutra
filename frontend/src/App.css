@@ -277,6 +277,75 @@ body {
   margin-top: 1.25rem;
 }
 
+/* ---------- Timeline ---------- */
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+}
+
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 120px;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+}
+
+.dot-saffron { background: var(--saffron); border-color: var(--saffron); }
+.dot-blue { background: var(--blue); border-color: var(--blue); }
+.dot-green { background: var(--green); border-color: var(--green); }
+
+.timeline-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.timeline-detail {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.timeline-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--blue), var(--green));
+  min-width: 40px;
+  max-width: 160px;
+  margin-top: -1.2rem;
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    flex-direction: column;
+    gap: 0;
+  }
+  .timeline-line {
+    width: 2px;
+    height: 24px;
+    min-width: 2px;
+    max-width: 2px;
+    margin-top: 0;
+    background: linear-gradient(180deg, var(--saffron), var(--blue), var(--green));
+  }
+  .timeline-node {
+    flex-direction: row;
+    gap: 0.6rem;
+    min-width: unset;
+  }
+}
+
 /* ---------- Phases ---------- */
 .phases {
   display: grid;
@@ -377,6 +446,17 @@ body {
   border-radius: 8px;
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+.phase-why {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 153, 51, 0.08);
+  border: 1px solid rgba(255, 153, 51, 0.25);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 /* ---------- Guide ---------- */
