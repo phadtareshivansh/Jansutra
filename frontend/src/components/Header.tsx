@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useI18n } from "../i18n/I18nContext";
 import type { Lang } from "../i18n/types";
@@ -27,6 +28,7 @@ export default function Header() {
   const { t } = useI18n();
   const { lang, setLang, labels } = useI18n();
   const { user, signInWithGoogle, signOutUser } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   async function onSignIn() {
     try {
@@ -36,10 +38,14 @@ export default function Header() {
     }
   }
 
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <header className="header">
       <div className="header-inner">
-        <a href="#overview" className="brand">
+        <a href="#overview" className="brand" onClick={closeMenu}>
           <span className="brand-flag">🇮🇳</span>
           <span>
             <span className="brand-name">{t("appName")}</span>
@@ -47,9 +53,20 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="nav">
+        <button
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav className={`nav ${menuOpen ? "nav-open" : ""}`}>
           {NAV_LINKS.map((k) => (
-            <a key={k} href={ANCHORS[k]} className="nav-link">
+            <a key={k} href={ANCHORS[k]} className="nav-link" onClick={closeMenu}>
               {t(k)}
             </a>
           ))}
