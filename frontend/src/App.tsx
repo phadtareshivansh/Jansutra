@@ -5,6 +5,7 @@ import Phases from "./components/Phases";
 import Guide from "./components/Guide";
 import Privacy from "./components/Privacy";
 import Schedule, { ScaleViz } from "./components/Schedule";
+import DataViz from "./components/DataViz";
 import Assistant from "./components/Assistant";
 import { apiFetch } from "./lib/apiFetch";
 import type { StateSchedule } from "./lib/types";
@@ -30,6 +31,16 @@ function App() {
             <h2 className="section-title">Census 2027</h2>
             <ScaleViz />
             {error && <p className="error">{error}</p>}
+          </div>
+        </section>
+
+        <section id="rollout" className="scale-section">
+          <div className="section-inner">
+            <h2 className="section-title">Rollout Timeline</h2>
+            <p className="section-subtitle">
+              Which states begin their self-enumeration window, month by month.
+            </p>
+            <DataViz states={states} />
           </div>
         </section>
 

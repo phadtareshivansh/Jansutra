@@ -31,9 +31,24 @@ function getHighlight(s: StateSchedule): string {
   return "none";
 }
 
+function SkeletonCards({ count = 6 }: { count?: number }) {
+  return (
+    <div className="schedule-grid" aria-hidden="true">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="schedule-card skeleton-card">
+          <div className="skeleton skeleton-line w-60" />
+          <div className="skeleton skeleton-line w-90" />
+          <div className="skeleton skeleton-line w-90" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Schedule({ states }: { states: StateSchedule[] }) {
   const { t } = useI18n();
   const [query, setQuery] = useState("");
+  const loading = states.length === 0;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -49,37 +64,44 @@ export default function Schedule({ states }: { states: StateSchedule[] }) {
         placeholder={t("schedule.search")}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        disabled={loading}
       />
 
-      <div className="schedule-grid">
-        {filtered.map((s) => {
-          const highlight = getHighlight(s);
-          const seStatus = windowStatus(s.selfEnumStart, s.selfEnumEnd);
-          const hlStatus = windowStatus(s.houseListingStart, s.houseListingEnd);
-          return (
-            <div key={s.state} className={`schedule-card ${highlight}`}>
-              <h3 className="schedule-state">{s.state}</h3>
-              <div className="schedule-row">
-                <span className="schedule-kind">{t("schedule.selfEnum")}</span>
-                <span className="schedule-dates">
-                  {formatDate(s.selfEnumStart)} → {formatDate(s.selfEnumEnd)}
-                </span>
-                <span className={`status status-${seStatus}`}>{t(STATUS_LABEL[seStatus])}</span>
-              </div>
-              <div className="schedule-row">
-                <span className="schedule-kind">{t("schedule.houseListing")}</span>
-                <span className="schedule-dates">
-                  {formatDate(s.houseListingStart)} → {formatDate(s.houseListingEnd)}
-                </span>
-                <span className={`status status-${hlStatus}`}>{t(STATUS_LABEL[hlStatus])}</span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <p className="schedule-note">
-        {filtered.length} {t("schedule.count")}
-      </p>
+      {loading ? (
+        <SkeletonCards />
+      ) : (
+        <>
+          <div className="schedule-grid">
+            {filtered.map((s) => {
+              const highlight = getHighlight(s);
+              const seStatus = windowStatus(s.selfEnumStart, s.selfEnumEnd);
+              const hlStatus = windowStatus(s.houseListingStart, s.houseListingEnd);
+              return (
+                <div key={s.state} className={`schedule-card ${highlight}`}>
+                  <h3 className="schedule-state">{s.state}</h3>
+                  <div className="schedule-row">
+                    <span className="schedule-kind">{t("schedule.selfEnum")}</span>
+                    <span className="schedule-dates">
+                      {formatDate(s.selfEnumStart)} → {formatDate(s.selfEnumEnd)}
+                    </span>
+                    <span className={`status status-${seStatus}`}>{t(STATUS_LABEL[seStatus])}</span>
+                  </div>
+                  <div className="schedule-row">
+                    <span className="schedule-kind">{t("schedule.houseListing")}</span>
+                    <span className="schedule-dates">
+                      {formatDate(s.houseListingStart)} → {formatDate(s.houseListingEnd)}
+                    </span>
+                    <span className={`status status-${hlStatus}`}>{t(STATUS_LABEL[hlStatus])}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="schedule-note">
+            {filtered.length} {t("schedule.count")}
+          </p>
+        </>
+      )}
     </Section>
   );
 }

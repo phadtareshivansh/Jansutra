@@ -767,6 +767,51 @@ body {
   margin-top: 1.25rem;
 }
 
+/* ---------- Data viz ---------- */
+.dataviz {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.dataviz-chart {
+  width: 100%;
+}
+
+.dataviz-caption {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 1rem;
+}
+
+/* ---------- Skeleton loaders ---------- */
+.skeleton-card {
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--panel) 25%, var(--panel-2) 50%, var(--panel) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: 6px;
+  height: 14px;
+}
+
+.skeleton-line.w-60 { width: 60%; }
+.skeleton-line.w-90 { width: 90%; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ---------- Assistant ---------- */
 .assistant {
   max-width: 720px;
