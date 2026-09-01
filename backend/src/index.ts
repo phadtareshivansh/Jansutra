@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
-import { createDB } from "./db";
+import { getFirebaseApp } from "./db";
 import { authMiddleware } from "./middleware/auth";
 import pingRoutes from "./routes/ping";
+import statesRoutes from "./routes/states";
+import askRoutes from "./routes/ask";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,18 +14,17 @@ app.use(express.json());
 app.use(authMiddleware);
 
 async function start() {
-  const db = await createDB();
-  app.locals.db = db;
+  // Initialise Firebase (lazily configured — no-op if credentials missing).
+  if (process.env.FIREBASE_PROJECT_ID) {
+    getFirebaseApp();
+  }
 
   app.use("/api", pingRoutes);
+  app.use("/api", statesRoutes);
+  app.use("/api", askRoutes);
 
   app.listen(PORT, () => {
     console.log(`Backend running on http://localhost:${PORT}`);
-  });
-
-  process.on("SIGTERM", async () => {
-    await db.close();
-    process.exit(0);
   });
 }
 

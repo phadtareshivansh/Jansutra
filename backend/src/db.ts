@@ -1,47 +1,55 @@
-import initSqlJs, { Database as SqlJsDatabase } from "sql.js";
-import { Pool } from "pg";
+import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
+import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
-export type DBClient = {
-  query: (text: string, params?: unknown[]) => Promise<{ rows: unknown[] }>;
-  close: () => Promise<void>;
-};
+export { type StateSchedule } from "./data/states";
 
-export async function createDB(): Promise<DBClient> {
-  const url = process.env.DATABASE_URL;
+let cachedApp: App | null = null;
+let cachedDb: Firestore | null = null;
 
-  if (url) {
-    console.log("Using PostgreSQL (Neon)");
-    const pool = new Pool({ connectionString: url });
-    return {
-      query: (text, params) => pool.query(text, params).then((r) => ({ rows: r.rows })),
-      close: () => pool.end(),
-    };
+/**
+ * Initialise the Firebase Admin SDK from environment variables.
+ * Returns null when not configured (local dev without credentials) so the
+ * app can degrade gracefully instead of crashing.
+ */
+export function getFirebaseApp(): App | null {
+  if (cachedApp) return cachedApp;
+
+  const projectId = process.env.FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+
+  if (!projectId || !clientEmail || !privateKey) {
+    console.warn("[firebase] Not configured (missing FIREBASE_PROJECT_ID / CLIENT_EMAIL / PRIVATE_KEY). Firestore/auth disabled.");
+    return null;
   }
 
-  console.log("Using SQLite fallback (local dev)");
-  const SQL = await initSqlJs();
-  const db: SqlJsDatabase = new SQL.Database();
-  db.run(`
-    CREATE TABLE IF NOT EXISTS ping_logs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      timestamp TEXT NOT NULL
-    )
-  `);
+  const existing = getApps().find((a) => a.name === "[DEFAULT]");
+  if (existing) {
+    cachedApp = existing;
+    return cachedApp;
+  }
 
-  return {
-    query: (text, params) => {
-      const stmt = db.prepare(text);
-      if (params) stmt.bind(params);
-      const rows: unknown[] = [];
-      while (stmt.step()) {
-        rows.push(stmt.getAsObject());
-      }
-      stmt.free();
-      return Promise.resolve({ rows });
-    },
-    close: () => {
-      db.close();
-      return Promise.resolve();
-    },
-  };
+  cachedApp = initializeApp({
+    projectId,
+    credential: cert({
+      projectId,
+      clientEmail,
+      privateKey: privateKey.replace(/\\n/g, "\n"),
+    }),
+  });
+  return cachedApp;
+}
+
+/** Access the Firestore database instance, or null when Firebase isn't configured. */
+export function getFirestoreDb(): Firestore | null {
+  if (cachedDb) return cachedDb;
+  const app = getFirebaseApp();
+  if (!app) return null;
+  cachedDb = getFirestore(app);
+  return cachedDb;
+}
+
+/** True when real Firebase credentials are configured. */
+export function isFirebaseConfigured(): boolean {
+  return Boolean(process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY);
 }

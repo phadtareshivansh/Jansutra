@@ -1,13 +1,14 @@
 import { Router, Request, Response } from "express";
+import { getFirestoreDb } from "../db";
 
 const router = Router();
 
-router.get("/ping", async (req: Request, res: Response) => {
-  const db = req.app.locals.db;
+router.get("/ping", async (_req: Request, res: Response) => {
+  const db = getFirestoreDb();
 
   try {
     if (db) {
-      await db.query("INSERT INTO ping_logs (timestamp) VALUES ($1)", [new Date().toISOString()]);
+      await db.collection("ping_logs").add({ timestamp: new Date().toISOString() });
     }
   } catch {
     // DB is optional — ping still works without it
